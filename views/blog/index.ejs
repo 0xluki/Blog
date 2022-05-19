@@ -1,0 +1,113 @@
+<%- include('../includes/header.ejs') %>
+  <link href="main.css" rel="stylesheet">
+  </head>
+
+  <body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+      <main class="main pt-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              <% if (info.length> 0 ) {%>
+                <div class="alert alert-primary" role="alert">
+                  <i class="bi bi-info-circle-fill me-2"></i>
+                  <%= info %>
+                </div>
+                <% } %>
+                  <% if (posts.length> 0) { %>
+                    <% posts.forEach(post=> { %>
+                      <article class="card mb-4">
+                        <header class="card-header bg-transparent">
+                          <div class="card-meta">
+                            <time class="timeago">
+                              <%= moment().from(post.postDate, true) %> ago
+                            </time>
+                          </div>
+                          <a href="posts/<%= post.slug %>">
+                            <h4 class="card-title">
+                              <%= post.title %>
+                            </h4>
+                          </a>
+                        </header>
+                        <% if (isAuthed){ %>
+                          <% if (user.admin) { %>
+                            <div class="d-flex flex-row-reverse">
+                              <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <h3><i class="bi bi-three-dots"></h3></i>
+                              </a>
+                              <div class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
+                                aria-labelledby="profileDropdown">
+                                <a class="dropdown-item" href="/posts/edit/<%= post.id %>"><i
+                                    class="bi bi-pencil-fill me-2"></i>Edit</a>
+                                <a class="dropdown-item" href="/admin/pin/<%= post.id %>"><i
+                                    class="bi bi-pin-fill me-2"></i>
+                                  <%= post.pinned==false ? 'pin' : 'Unpin' %>
+                                </a>
+                                <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="d-inline">
+                                  <button type="submit " class="dropdown-item font-weight-normal"><i
+                                      class="bi bi-trash2-fill me-2"></i>Delete</button>
+                                </form>
+                              </div>
+                            </div>
+                            <% } %>
+                              <% } %>
+                                <a href="posts/<%= post.slug %>">
+                                  <img class="card-img" src="<%= post.imageUrl %>" alt="" />
+                                </a>
+                                <div class="card-body row">
+                                  <p class="card-text col-11 text-truncate">
+                                    <%= post.content %>
+                                  </p>
+                                </div>
+                      </article>
+                      <% }) %>
+                        <% } else { %>
+                          <h1>No Posts Yet</h1>
+                          <% } %>
+            </div>
+            <div class="col-md-3 ms-auto">
+
+              <aside class="sidebar sidebar-sticky">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <h4 class="card-title">Categories:</h4>
+                    <a class="btn btn-light btn-sm mb-1" href="/category/Travel">Travel</a>
+                    <a class="btn btn-light btn-sm mb-1" href="/category/Work">Work</a>
+                    <a class="btn btn-light btn-sm mb-1" href="/category/Lifestyle">Lifestyle</a>
+                    <a class="btn btn-light btn-sm mb-1" href="/category/Photography">Photography</a>
+                    <a class="btn btn-light btn-sm mb-1" href="/category/Food & Drinks">Food & Drinks</a>
+                  </div>
+                </div>
+
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <h4 class="card-title"><i class="bi bi-pin-angle me-2"></i>Pinned</h4>
+                    <% if (pinned.length> 0) { %>
+                      <% pinned.forEach(post=> { %>
+                        <a href="posts/<%= post.slug %>" class="d-inline-block">
+                          <h4 class="h6">
+                            <%= post.title %>
+                          </h4>
+                          <img class="card-img" src="<%= post.imageUrl %>" alt="" />
+                        </a>
+                        <p>
+                        <time class="timeago">
+                          <%= moment().from(post.postDate, true) %> ago
+                        </time>
+                        </p>
+                        <% }) %>
+                          <% } else { %>
+                            <small>there is no pinned posts</small>
+                            <% } %>
+                  </div>
+                </div>
+
+              </aside>
+
+            </div>
+          </div>
+        </div>
+
+      </main>
+      <%- include('../includes/footer.ejs') %>

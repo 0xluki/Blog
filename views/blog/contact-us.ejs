@@ -1,0 +1,50 @@
+<%- include('../includes/header.ejs') %>
+</head>
+<body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+    <main class="main pt-4">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 mx-auto">
+              <% if (successMsg.length > 0) { %>
+                <div class="alert alert-success" role="alert">
+                  <i class="bi bi-check-circle-fill me-2"></i><%= successMsg %>
+                </div>
+                <% } %>
+              <article class="card mb-4">
+                <header class="card-header text-center">
+                  <h1 class="card-title">Get in touch</h1>
+                </header>
+                <div class="card-body">
+        
+                  <form action="/contact-us" method="post">
+                    <div class="mb-3">
+                      <label class="form-label" for="name">Name</label>
+                      <input required type="text" name="name" class="form-control" id="name" placeholder="Name">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="email">Email</label>
+                      <input required type="email"  name ="email" class="form-control" id="email" placeholder="Email address">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="subject">Subject</label>
+                      <input required type="text" name="subject" class="form-control" id="subject" placeholder="subject">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="question">Message</label>
+                      <textarea required class="form-control" name= "message" id="message" rows="4" placeholder="Message"></textarea>
+                    </div>
+    
+                    <button type="submit" class="btn btn-success">Send</button>
+                  </form>
+    
+                </div>
+              </article><!-- /.card -->
+    
+            </div>
+          </div>
+        </div>
+    
+      </main>
+<%- include('../includes/footer.ejs') %>

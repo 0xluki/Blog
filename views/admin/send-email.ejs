@@ -1,0 +1,39 @@
+<%- include('../includes/header.ejs') %>
+</head>
+<body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+    <main class="main pt-4">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 mx-auto">
+    
+              <article class="card mb-4">
+                <header class="card-header text-center">
+                  <h1 class="card-title">Send Message</h1>
+                </header>
+                <div class="card-body">
+        
+                  <form action="/admin/send-email" method="post">
+                    <input type="hidden" name="email" value="<%= email %>">
+                    <div class="mb-3">
+                      <label class="form-label" for="subject">Subject</label>
+                      <input required type="text" name="subject" class="form-control" id="subject" placeholder="subject">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="question">Message</label>
+                      <textarea required class="form-control" name= "message" id="message" rows="4" placeholder="Message"></textarea>
+                    </div>
+    
+                    <button type="submit" class="btn btn-success">Send</button>
+                  </form>
+    
+                </div>
+              </article><!-- /.card -->
+    
+            </div>
+          </div>
+        </div>
+    
+      </main>
+<%- include('../includes/footer.ejs') %>

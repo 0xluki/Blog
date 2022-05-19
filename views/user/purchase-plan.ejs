@@ -1,0 +1,59 @@
+<%- include('../includes/header.ejs') %>
+</head>
+<body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+              <div class="card shadow-2-strong card-registration border-0 shadow" style="border-radius: 15px;">
+                <div class="card-body p-4 p-md-5">
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Go Premium</h3>
+                  <form action="/Premium" method="post" class="mx-1 mx-md-4" >
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      
+                        
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label" for="form3Example1c">Credit Card Number</label>
+                          <input required type="text" id="form3Example1c" name="cardNumber" class="form-control" placeholder="Credit Card Number"/>
+                        </div>
+                      </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example1c" name="expires">Expires</label>
+                        <input required type="number" id="form3Example1c" class="form-control" placeholder="MM" name="month"/>
+                        <input required type="number" id="form3Example1c" class="form-control" placeholder="YY" name="Year"/>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example3c" name="name">Name on Credit Card</label>
+                        <input required type="text" id="form3Example3c" class="form-control" placeholder="name" name="name"/>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example4c" name="cvc">CVC</label>
+                        <input required type="number" id="form3Example4c" class="form-control" placeholder="cvc" name="cvc"/>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button type="submit" class="btn btn-primary btn-lg">Subscribe</button>
+                    </div>
+  
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+<%- include('../includes/footer.ejs') %>

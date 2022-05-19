@@ -1,0 +1,145 @@
+<%- include('../includes/header.ejs') %>
+
+    </head>
+
+    <body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+        <%- include('../includes/navigation.ejs') %>
+            <main class="main pt-4">
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-9">
+
+
+                            <article class="card mb-4">
+                                <header class="card-header text-center">
+                                    <div class="card-meta">
+                                        <time class="timeago">
+                                            <%= moment().from(post.postDate, true) %> ago
+                                        </time>
+                                    </div>
+                                    <h1 class="card-title">
+                                        <%= post.title %>
+                                    </h1>
+                                </header>
+                                <% if (user.admin) { %>
+                                <div class="d-flex flex-row-reverse">
+                                    <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button"
+                                     data-bs-toggle="dropdown"
+                                    aria-expanded="false"><h3><i class="bi bi-three-dots"></h3></i></a>
+                                    <div class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
+                                    aria-labelledby="profileDropdown">
+                                        <a class="dropdown-item" href="/posts/edit/<%= post.id %>"><i class="bi bi-pencil-fill me-2"></i>Edit</a>
+                                        <a class="dropdown-item" href="/admin/pin/<%= post.id %>"><i class="bi bi-pin-fill me-2"></i><%= post.pinned == false ? 'pin' : 'Unpin' %></a>
+                                        <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="d-inline">
+                                            <button type="submit " class="dropdown-item font-weight-normal"><i class="bi bi-trash2-fill me-2"></i>Delete</button>
+                                            </form>
+                                    </div>
+                                </div>
+                                <% } %>
+
+
+                                <img class="card-img" src="<%= post.imageUrl %>" alt="" />
+                                <div class="card-body">
+                                    <p>
+                                        <%= post.content %>
+                                    </p>
+                                    <hr />
+
+                                    <h3>
+                                        <%= comments.length %> Comments
+                                    </h3>
+                                    <% if (comments.length> 0) { %>
+                                        <% comments.forEach(comment=> { %>
+                                            <div class="d-flex mb-3 p-3 bg-light">
+                                                <div class="text-center">
+                                                    <% if (user._id.toString() == comment.userId._id.toString()) { %>
+                                                        <a href="/profile">
+                                                    <% } else { %>
+                                                        <a href="/user/<%= comment.userId.username %>">
+                                                    <% } %>
+                                                    <img class="me-3 rounded-circle" src="<%= comment.userId.avatar %>"
+                                                        width="100" height="100">
+                                                    </a>
+                                                    <h6 class="mt-1 mb-0 me-3">
+                                                        <% if (user._id.toString() == comment.userId._id.toString()) { %>
+                                                            <a href="/profile">
+                                                        <% } else { %>
+                                                            <a href="/user/<%= comment.userId.username %>">
+                                                        <% } %>
+                                                        <%= comment.userId.name %>
+                                                    </a>
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="mt-3 mb-2">
+                                                        <%= comment.comment %>
+                                                    </p>
+                                                    <small class="text-muted m-0">
+                                                        <%= moment().from(comment.commentDate, true) %> ago
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <% }) %>
+                                                <% } %>
+                                                    <div class="mt-5">
+                                                        <h5>Write a Comment</h5>
+                                                        <form action="/posts/comment" method="POST">
+                                                            <input type="hidden" name="postId" value="<%= post.id %>">
+                                                            <input type="hidden" name="postSlug" value="<%=post.slug%>">
+                                                            <textarea required name="comment" id="comment"
+                                                                class="form-control mt-3" rows="3"
+                                                                placeholder="Write a Comment.."></textarea>
+                                                            <button type="submit"
+                                                                class="btn btn-success mt-3">Comment</button>
+                                                        </form>
+                                                    </div>
+
+                                </div>
+                            </article>
+
+                        </div>
+                        <div class="col-md-3 ms-auto">
+                            
+                            <aside class="sidebar sidebar-sticky">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                      <h4 class="card-title"><i class="bi bi-tags me-2"></i>Categories:</h4>
+                                      <a class="btn btn-light btn-sm mb-1" href="/category/Travel">Travel</a>
+                                      <a class="btn btn-light btn-sm mb-1" href="/category/Work">Work</a>
+                                      <a class="btn btn-light btn-sm mb-1" href="/category/Lifestyle">Lifestyle</a>
+                                      <a class="btn btn-light btn-sm mb-1" href="/category/Photography">Photography</a>
+                                      <a class="btn btn-light btn-sm mb-1" href="/category/Food & Drinks">Food & Drinks</a>
+                                    </div>
+                                  </div>
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h4 class="card-title"><i class="bi bi-pin-angle me-2"></i>Pinned</h4>
+                                        <% if (pinned.length> 0) { %>
+                                            <% pinned.forEach(post=> { %>
+                                                <a href="/posts/<%= post.slug %>" class="d-inline-block">
+                                                    <h4 class="h6">
+                                                        <%= post.title %>
+                                                    </h4>
+                                                    <img class="card-img" src="<%= post.imageUrl %>" alt="" />
+                                                </a>
+                                                <time class="timeago">
+                                                    <%= moment().from(post.postDate, true) %> ago
+                                                </time>
+                                                <% }) %>
+                                                    <% } else { %>
+                                                        <small>there is no pinned posts</small>
+                                                        <% } %>
+                                    </div>
+                                </div>
+
+                            </aside>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <%- include('../includes/footer.ejs') %>

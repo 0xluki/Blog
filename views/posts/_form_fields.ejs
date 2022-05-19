@@ -1,0 +1,36 @@
+<div class="card-body">
+    <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input required value="<%= post.title %>" type="text" name="title" id="title" class="form-control">
+    </div>
+    <label class="form-label" for="title">Category</label>
+    <div class="btn-group form-control border-0 px-0" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="category" id="category1" autocomplete="off" value= "Photography" <%= post.category  =="Photography" ? 'checked' : '' %>>
+        <label class="btn btn-outline-secondary" for="category1">Photography</label>
+      
+        <input type="radio" class="btn-check" name="category" id="category2" autocomplete="off" value="Travel" <%= post.category  =="Travel" ? 'checked' : '' %>>
+        <label class="btn btn-outline-secondary" for="category2">Travel</label>
+      
+        <input type="radio" class="btn-check" name="category" id="category3" autocomplete="off" value="Lifestyle" <%= post.category  =="Lifestyle" ? 'checked' : '' %>>
+        <label class="btn btn-outline-secondary" for="category3">Lifestyle</label>
+
+        <input type="radio" class="btn-check" name="category" id="category4" autocomplete="off" value="Work" <%= post.category  =="Work" ? 'checked' : '' %>>
+        <label class="btn btn-outline-secondary" for="category4">Work</label>
+
+        <input type="radio" class="btn-check" name="category" id="category5" autocomplete="off" value="Food & Drinks" <%= post.category  =="Food & Drinks" ? 'checked' : '' %>>
+        <label class="btn btn-outline-secondary" for="category5">Food & Drinks</label>
+      </div>
+    <div class="mb-3">
+        <label class="form-label" for="title">Image</label>
+        <input type="file" name="image" id="image" class="form-control" accept="image/*">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="question">Content</label>
+        <textarea required class="form-control" name="content" id="content" rows="4"
+            placeholder="content"><%= post.content %></textarea>
+    </div>
+    <a href="/" class="btn">Cancel</a>
+    <button type="submit" class="btn btn-success">Post</button>
+
+</div>
+</article>

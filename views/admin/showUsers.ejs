@@ -1,0 +1,65 @@
+<%- include('../includes/header.ejs') %>
+</head>
+<body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+        <% if (users.length> 0) { %>
+            <style>
+                thead th {
+                padding: 13px !important;
+                height: 20px;
+                }
+                .table > :not(:first-child) {
+                border-top: 0;
+                }
+            </style>
+            
+    
+            <div class="container my-5">
+                <table class="table align-middle table-hover shadow">
+                    <thead class="bg-light">
+                      <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody">
+                    <% users.forEach(user=> { %>
+                        <tr>
+                          <td>
+                            <div class="d-flex align-items-center">
+                                <a href="/user/<%= user.username %>">
+                                  <img src="<%= user.avatar %>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                </a>
+                                <div class="ms-3">
+                                  
+                                    <p class="fw-bold mb-1">
+                                      <%= user.name %>
+                                    </p>
+
+                                </div>
+                              </div>
+                          </td>
+                          <td>
+                            <p class="fw-normal mb-1">@<%= user.username %></p>
+                          </td>
+                          <td>
+                            <p class="fw-normal mb-1"><%= user.email %></p>
+                          </td>
+                          <td>
+                            <a href="/admin/send-email/<%= user.email %>" class="btn btn-neutral text-primary">Email</a>
+                            <a href="/admin/delete-user/<%= user.id %>" class="btn btn-square btn-neutral text-danger-hover"><i class="bi bi-trash"></i></a>
+                          </td>
+                        </tr>
+                          <% }) %>
+                    </tbody>
+                </table>  
+            </div>
+
+            <% } else { %>
+              <div class="container">
+                <h3 class="card-title mt-5">No Users Yet!</h3>
+              </div>
+            <% } %>
+ <%- include('../includes/footer.ejs') %>

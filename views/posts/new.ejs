@@ -1,0 +1,26 @@
+<%- include('../includes/header.ejs') %>
+    </head>
+
+    <body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+        <%- include('../includes/navigation.ejs') %>
+            <main class="main pt-4">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <form action="/posts" method="POST" enctype="multipart/form-data">
+                                <article class="card mb-4">
+                                    <header class="card-header text-center">
+                                      <h1 class="card-title">Add Post</h1>
+                                    </header>
+                                <%- include('_form_fields') %>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            </main>
+
+            <%- include('../includes/footer.ejs') %>

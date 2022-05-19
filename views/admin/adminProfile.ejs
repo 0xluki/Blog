@@ -1,0 +1,87 @@
+<%- include('../includes/header.ejs') %>
+
+    </head>
+
+    <body style="font-family:sans-serif;" class="d-flex flex-column min-vh-100">
+        <%- include('../includes/navigation.ejs') %>
+        <div class="container my-5">
+
+            <h3>
+                Dashboard
+            </h3>
+    
+            <h5 class="text-muted mb-5">
+                Welcome <%= user.name %>, everything looks great.
+            </h5>
+    
+            <div class="row gutters-sm">
+                <div class="col-md-3 mb-3">
+                    <div class="card shadow text-center">
+                        <h4><%= numberOfUsers %></h4>
+                        <h5 class="text-muted">Users</h5>
+                    </div>
+                    <div class="card shadow bg-light text-center">
+                      <a href="/admin/show-users" class="text-primary">view all users</a>
+                  </div>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <div class="card shadow text-center">
+                        <h4><%= numberOfPosts %></h4>
+                        <h5 class="text-muted">Posts</h5>
+                    </div>
+                    <div class="card shadow bg-light text-center">
+                        <a href="/" class="text-primary">view all posts</a>
+                  </div>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <div class="card shadow text-center">
+                        <h4><%= numberOfComments %></h4>
+                        <h5 class="text-muted">Comments</h5>
+                    </div>
+                    <div class="card shadow bg-light text-center">
+                        <a href="/" class="text-primary">view all posts</a>
+                  </div>
+                  </div>
+            </div>
+    
+    
+            <h4 class="mt-5">
+                The post with most interaction
+            </h4>
+    
+            <div class="row">
+                <div class="col-md-9">
+                  <% if (highestPost) { %>
+                      <article class="card mb-4">
+                        <header class="card-header bg-transparent">
+                          <div class="card-meta">
+                            <time class="timeago">
+                              <%= moment().from(highestPost.postDate, true) %> ago
+                            </time>
+                          </div>
+                          <a href="/posts/<%= highestPost.slug %>">
+                            <h4 class="card-title">
+                              <%= highestPost.title %>
+                            </h4>
+                          </a>
+                        </header>
+                        <a href="/posts/<%= highestPost.slug %>">
+                          <img class="card-img" src="<%= highestPost.imageUrl %>" alt="" />
+                        </a>
+                        <div class="card-body row">
+                          <p class="card-text col-11 text-truncate">
+                            <%= highestPost.content %>
+                          </p>
+                        </div>
+                      </article>
+                        <% } else { %>
+                          <h1>No Posts Yest</h1>
+                          <% } %>
+                </div>
+                <div class="col-md-3 ms-auto">
+                    </div>
+        
+        </div>
+          </div>
+
+    <%- include('../includes/footer.ejs') %>

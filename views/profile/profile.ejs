@@ -1,0 +1,119 @@
+<%- include('../includes/header.ejs') %>
+  </head>
+
+  <body style="font-family:sans-serif" class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+
+      <div class="container mt-5">
+
+        <div class="main-body">
+
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card shadow">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="<%= user.avatar %>" class="rounded-circle"
+                      width="150">
+                    <div class="mt-3">
+                      <h4>
+                        <%= user.name %>
+                      </h4>
+                      <p class="text-secondary mb-1">@<%= user.username %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3 shadow">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <%= user.name %>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Username</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <%= user.username %>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <%= user.email %>
+                    </div>
+                  </div>
+                  <hr>
+                  <% if (user.plan) { %>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0 mt-1 ">Plan</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <%= user.plan %>
+                      </div>
+                    </div>
+                    <hr>
+                    <% } %>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <a class="btn btn-info "
+                            href="/profile/edit">Edit</a>
+                        </div>
+                      </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="container mt-5">
+            <h2>My Posts</h2>
+            <hr/>
+          </div>
+
+          <div class="container">
+              <% if (posts.length> 0) { %>
+                <% posts.forEach(post=> { %>
+                  <article class="card mb-4">
+                    <header class="card-header bg-transparent">
+                      <div class="card-meta">
+                        <time class="timeago">
+                          <%= moment().from(post.postDate, true) %> ago
+                        </time>
+                      </div>
+                      <a href="posts/<%= post.slug %>">
+                        <h4 class="card-title">
+                          <%= post.title %>
+                        </h4>
+                      </a>
+                    </header>
+                    <a href="posts/<%= post.slug %>">
+                      <img class="card-img" src="<%= post.imageUrl %>" alt="" />
+                    </a>
+                    <div class="card-body row">
+                      <p class="card-text col-11 text-truncate">
+                        <%= post.content %>
+                      </p>
+                    </div>
+                  </article>
+                  <% }) %>
+                    <% } else { %>
+                      <h4 class="mb-5 text-muted">No posts yet!</h4>
+                      <% } %>
+            </div>
+          </div>
+        </div>
+        <%- include('../includes/footer.ejs') %>

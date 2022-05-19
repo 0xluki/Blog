@@ -1,0 +1,86 @@
+<%- include('../includes/header.ejs') %>
+</head>
+<body style="font-family:sans-serif" class="d-flex flex-column min-vh-100">
+    <%- include('../includes/navigation.ejs') %>
+    <div class="container my-5">
+		<div class="main-body">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card shadow">
+						<form action="/profile/edit" method="POST" enctype="multipart/form-data">
+						<div class="card-body">
+							<div class="d-flex flex-column align-items-center text-center">
+
+									<p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+									<p><label for="file" style="cursor: pointer;"><img src="<%= user.avatar %>"  class="rounded-circle p-1" id="output" width="110" /></label></p>
+									<p></p>
+								</label>
+                                </h1>
+								<div class="">
+									<h4><%= user.name %></h4>
+									<p class="text-secondary mb-1">@<%= user.username %></p>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="card shadow">
+						<div class="card-body">
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0 mt-2">Name</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input required value="<%= user.name %>" type="text" name="name" id="name"
+                                    class="form-control">
+								</div>
+							</div>
+                            <div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0 mt-2">Username</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input required value="<%= user.username %>" type="text" name="username" id="username"
+                                    class="form-control">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0 mt-2">Email</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input required value="<%= user.email %>" type="text" name="email" id="email"
+                                    class="form-control">
+								</div>
+							</div>
+
+                            <div class="row mb-3">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9 text-secondary">
+									<a href="/change-password" class="btn btn-info">Change password</a>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9 text-secondary">
+									<button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                                    <a href="/profile" class="btn btn-outline-primary px-4">cancel</a>
+								</div>
+							</div>
+						</div>
+                    </form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
+    <%- include('../includes/footer.ejs') %>

@@ -1,7 +1,7 @@
 # Blog
 influncer blog
 ---
-## To intsall required packges 
+## To intsall required packages 
 ```javascript
 npm insall
 ```

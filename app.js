@@ -21,7 +21,7 @@ const adminRoutes = require('./routes/admin');
 
 const errorContoller = require('./controllers/error');
 
-const MONGO_URI = 'mongodb+srv://luki:I0vfrJMk44hqhfLC@cluster0.iqybe.mongodb.net/blog?retryWrites=true&w=majority';
+const MONGO_URI = 'YOUR_MONGO_DB_URI';
 const PORT = 3000 || process.env.PORT;
 
 // new mongoDBStore
